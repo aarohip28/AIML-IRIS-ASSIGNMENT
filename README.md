@@ -1,4 +1,5 @@
 # AIML-IRIS-ASSIGNMENT
+
 This project is a submission for the AI/ML Engineer position at **IRIS Business Services Ltd.**  
 It demonstrates the use of **FastAPI** to process an Excel file and expose useful API endpoints for interacting with its contents.
 
@@ -20,12 +21,14 @@ The application:
 - **Pandas** for Excel file processing
 - **Uvicorn** for running the server
 - **Postman** for API testing
+- **xlrd/openpyxl** for Excel support
 
 ---
 
 ## 📌 API Endpoints
 
 ### 1. `GET /list_tables`
+
 Returns all sheet names (tables) in the Excel file.
 
 **Response Example:**
@@ -33,8 +36,12 @@ Returns all sheet names (tables) in the Excel file.
 {
   "tables": ["CapBudgWS"]
 }
+```
 
-### 2. 'GET /get_table_details?table_name=CapBudgWS'
+---
+
+### 2. `GET /get_table_details?table_name=CapBudgWS`
+
 Returns all row names (first column) from the selected table.
 
 **Response Example:**
@@ -47,8 +54,12 @@ Returns all row names (first column) from the selected table.
     "Lifetime of the investment"
   ]
 }
+```
 
-### 3. 'GET /row_sum?table_name=CapBudgWS&row_name=Initial Investment='
+---
+
+### 3. `GET /row_sum?table_name=CapBudgWS&row_name=Initial Investment=`
+
 Calculates and returns the sum of all numeric values in a specific row.
 
 **Response Example:**
@@ -58,50 +69,69 @@ Calculates and returns the sum of all numeric values in a specific row.
   "row_name": "Initial Investment=",
   "sum": 250000
 }
+```
 
+---
 
+## ▶️ How to Run the Project
 
-▶️ How to Run the Project
-🛠️ 1. Install Dependencies
+### 🛠️ 1. Install Dependencies
+
+```bash
 pip install fastapi uvicorn pandas openpyxl xlrd
+```
 
+### 🚀 2. Run the App
 
-🚀 2. Run the App
+```bash
 uvicorn main:app --reload --port 9090
+```
 
-🌐 3. Open Swagger UI
-Visit http://localhost:9090/docs to interact with the API.
+### 🌐 3. Open Swagger UI
 
-📦 Postman Collection
-A Postman collection is included for easy testing.
+Visit [http://localhost:9090/docs](http://localhost:9090/docs) to interact with the API.
 
-File: IRIS_Postman_Collection.json
+---
 
-Import into Postman and test:
-/list_tables
+## 📦 Postman Collection
 
-/get_table_details
+A Postman collection (`IRIS_Postman_Collection.json`) is included for easy API testing.
 
-/row_sum
+### 📥 How to Use:
 
+1. Clone/download this repository.
+2. Install dependencies and run the FastAPI app (as shown above).
+3. Open Postman and import the collection file.
+4. Make sure the FastAPI app is running at `http://localhost:9090`.
+5. Use the collection to test:
+   - `/list_tables`
+   - `/get_table_details`
+   - `/row_sum`
 
-💡 Potential Improvements
-Accept Excel file uploads via POST API
+⚠️ **Important:**  
+The URLs in the collection use `localhost`. These will only work after you’ve started the app locally.
 
-Add frontend interface to explore tables and values
+---
 
-Handle multiple Excel formats and irregular sheets
+## 💡 Potential Improvements
 
-⚠️ Known Edge Cases
-Table or row names must match exactly (case-sensitive)
+- Accept Excel file uploads via POST API
+- Add frontend interface to explore tables and values
+- Handle `.xlsx` and other formats
+- Add unit tests and Docker support
 
-Rows with text or missing values are safely ignored in summation
+---
 
-Only .xls is currently tested (not .xlsx)
+## ⚠️ Known Edge Cases
 
+- Table or row names must match exactly (case-sensitive)
+- Empty cells or text values are skipped in row summation
+- File must be in `.xls` format (tested only)
 
-👤 Author
-Aarohi Parag Pisolkar
-B.E. Artificial Intelligence and Data Science
-LinkedIn • GitHub • Email
+---
 
+## 👤 Author
+
+**Aarohi Parag Pisolkar**  
+B.E. Artificial Intelligence and Data Science  
+[LinkedIn](#) • [GitHub](#) • [Email](#)
